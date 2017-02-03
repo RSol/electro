@@ -13,19 +13,41 @@
             <house :house="p"></house>
           </div>
         </div>
-        <spinner :loaded="loaded"></spinner>
+
+        <li class="collection-item" v-if="editMode">
+        <form>
+          <div class="row">
+            <div class="input-field col s12">
+              <input
+                      id="street"
+                      type="text"
+                      class="validate"
+                      v-focus="editMode"
+                      @keyup.enter="doneEdit"
+                      @keyup.esc="cancelEdit">
+              <label for="street">Название</label>
+            </div>
+          </div>
+        </form>
+        <spinner :loaded="loaded"></spinner>        
+      </li>
+   
       </div>
     </div>
   </div>
+
 </template>
 
 <script type="text/babel">
   import {mapGetters, mapActions} from 'vuex'
   import Spinner from './Spinner.vue'
   import house from './house.vue'
-  import crud from '../mixin/crud'
   export default {
-    mixins: [crud],
+    data () {
+      return {
+        editMode: false
+      }
+    },
     computed: mapGetters({
       houses: 'allHouses',
       loaded: 'loadedHouse',
@@ -33,14 +55,21 @@
     }),
     methods: {
       ...mapActions([
-        'selectHouse'
+        'selectHouse',
+        'addHouse'
       ]),
+      doEdit () {
+        this.editMode = !this.editMode
+      },
       doneEdit (e) {
-        // const value = e.target.value.trim()
-        // if (value && this.editMode) {
-        //   this.addStreet(value)
-        // }
-        // this.cancelEdit()
+        const value = e.target.value.trim()
+        if (value && this.editMode) {
+          this.addHouse(value)
+        }
+        this.cancelEdit()
+      },
+      cancelEdit () {
+        this.editMode = false
       }
     },
     components: {Spinner, house}
@@ -62,6 +91,12 @@
 
   .fade-enter, .fade-leave {
     opacity: 0;
+  }
+
+    .card-panel {
+    li {
+      list-style-type: none;
+    }
   }
 
 </style>

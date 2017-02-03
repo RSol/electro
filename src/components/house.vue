@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div class="card medium z-depth-2 hoverable">
+    <div class="card small z-depth-2 hoverable">
         <div class="card-content">
           <span class="card-title activator">
             Дом №{{ house.title }}
@@ -30,9 +30,7 @@
             Дом №{{ house.title }}
             <i class="material-icons right teal-text">close</i>
           </span>
-
-          <tabs :house="house"></tabs>
-
+          <p>Here is some more information about this product that is only revealed once clicked on.</p>
         </div>
         <div class="card-action">
           <a href="#!" class="green-text" @click="doEdit()"><i class="material-icons">mode_edit</i></a>
@@ -47,7 +45,6 @@
   import {mapActions} from 'vuex'
   import api from '../api/electro'
   import pair from './pair.vue'
-  import tabs from './tabs.vue'
   export default{
     props: ['house'],
     data () {
@@ -121,7 +118,7 @@
         this.editMode = false
       }
     },
-    components: {pair, tabs}
+    components: {pair}
   }
 
 </script>

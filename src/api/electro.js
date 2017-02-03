@@ -118,6 +118,16 @@ export default {
         .catch((ex) => console.log('group delete failed', ex))
     }
   },
+  house: {
+    addHouse (title, cb) {
+      delay(1000)
+        .then(() => cb({
+          id: 25,
+          title: title
+        }))
+        .catch((ex) => console.log('house adding failed', ex))
+    }
+  },
   getStreetById (id) {
     let street = _streets.find((element) => {
       return element.id === id
@@ -140,4 +150,15 @@ export default {
       title: ''
     }
   }
+  //   getHouseById (id) {
+  //   let house = _houses.find((element) => {
+  //     return element.id === id
+  //   })
+  //   if (house !== undefined) {
+  //     return house
+  //   }
+  //   return {
+  //     title: ''
+  //   }
+  // }
 }

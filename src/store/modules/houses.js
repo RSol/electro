@@ -1,4 +1,4 @@
-// import api from '../../api/electro'
+import api from '../../api/electro'
 import * as types from '../mutation-types'
 
 // initial state
@@ -18,10 +18,10 @@ const getters = {
 // actions
 const actions = {
   selectHouse ({commit}, house) {
-    // commit(types.HOUSE_SELECT, {house})
-    // api.getHouses(house, houses => {
-    //   console.log(houses)
-    // })
+    commit(types.HOUSE_SELECT, {house})
+    api.getHouses(house, houses => {
+      console.log(houses)
+    })
   },
   editHouse ({commit}, data) {
     // for (let i in state.all) {
@@ -34,10 +34,10 @@ const actions = {
     // }
   },
   addHouse ({commit}, title) {
-    // commit(types.HOUSE_LOADED)
-    // api.addStreet(title, street => {
-    //   commit(types.HOUSE_ADD, street)
-    // })
+    commit(types.HOUSE_LOADED)
+    api.house.addHouse(title, house => {
+      commit(types.HOUSE_ADD, house)
+    })
   }
 }
 
